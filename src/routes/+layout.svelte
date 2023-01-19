@@ -14,6 +14,6 @@
 	#master {
 		overflow-x: hidden;
 		overflow-y: auto;
-		background-color: #f6fff8;
+		background-color: #00b4d827;
 	}
 </style>
