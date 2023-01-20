@@ -1,4 +1,6 @@
 <script>
+	import PageTitle from '../components/PageTitle.svelte';
+
 	const column1 = ['Kelistrikan', 'Instrumentasi', 'Pipanisasi', 'Pengelasan', 'Konstruksi'];
 	const column2 = ['Pengecetan', 'Isolasi', 'Penyetelan', 'Perakitan', 'Pekerjaan PVC'];
 	const column3 = [
@@ -20,8 +22,7 @@
 </script>
 
 <section class="container mt-3">
-	<h3 class="text-center text-primary-emphasis p-2 bg-primary-subtle">BUAT WORKING PERMIT</h3>
-	<hr />
+	<PageTitle title='buat working permit' />
 	<form action="">
 		<div class="row">
 			<div class="col-lg-6">
@@ -169,7 +170,7 @@
 							</div>
 						</div>
 						<div class="col-lg">
-							<input class="form-control" type="file" disabled={!hirarc} />
+							<input class:d-none={!hirarc} class="form-control" type="file" />
 						</div>
 					</div>
 					<div class="row mb-2">
@@ -186,7 +187,7 @@
 							</div>
 						</div>
 						<div class="col-lg">
-							<input class="form-control" type="file" disabled={!jsa} />
+							<input class="form-control" type="file" class:d-none={!jsa} />
 						</div>
 					</div>
 					<div class="row mb-2">
@@ -203,7 +204,7 @@
 							</div>
 						</div>
 						<div class="col-lg">
-							<input class="form-control" type="file" disabled={!prosedur} />
+							<input class="form-control" type="file" class:d-none={!prosedur} />
 						</div>
 					</div>
 					<div class="row">
@@ -222,11 +223,11 @@
 							</div>
 						</div>
 						<div class="col-lg">
-							<input class="form-control" type="file" disabled={!sertifikat} />
+							<input class="form-control" type="file" class:d-none={!sertifikat} />
 						</div>
 					</div>
 					<hr />
-					<div class="btn btn-secondary rounded-0">Buat JSA</div>
+					<a href="/input/jsa" class="btn btn-secondary rounded-0">Buat JSA</a>
 				</div>
 				<div class="d-flex justify-content-center mt-4">
 					<button class="btn btn-outline-secondary w-25" type="reset">Reset</button>
@@ -246,9 +247,7 @@
 	button {
 		border-radius: 0;
 	}
-	h3 {
-		font-weight: 700;
-	}
+
 	h6 {
 		font-weight: 700;
 	}

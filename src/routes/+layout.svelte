@@ -13,7 +13,8 @@
 <style>
 	#master {
 		overflow-x: hidden;
-		overflow-y: auto;
+		/* overflow-y: auto; */
 		background-color: #00b4d827;
+		height: 100vh;
 	}
 </style>

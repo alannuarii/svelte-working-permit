@@ -80,7 +80,7 @@
 			</tbody>
 		</table>
 	</div>
-	<div class="mt-2 d-flex justify-content-center">
+	<!-- <div class="mt-2 d-flex justify-content-center">
 		<nav aria-label="Page navigation example">
 			<ul class="pagination">
 				<li class="page-item">
@@ -98,16 +98,13 @@
 				</li>
 			</ul>
 		</nav>
-	</div>
+	</div> -->
 </section>
 <section class="d-lg-none">
 	<InputButton />
 </section>
 
 <style>
-	section {
-		height: 86vh;
-	}
 	.card {
 		height: 530px;
 	}
