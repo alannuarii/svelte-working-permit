@@ -26,9 +26,9 @@
 	let jsa = false;
 	let prosedur = false;
 	let sertifikat = false;
-	let isRequired = true;
 
 	let klasifikasi = [];
+	let prosedurPekerjaan = [];
 
 	const checkLocalStorage = () => {
 		const storedData = localStorage.getItem('working-permit');
@@ -49,6 +49,18 @@
 		}
 	};
 
+	const handleProsedur = (event) => {
+		let value = event.target.value;
+		if (event.target.checked) {
+			prosedurPekerjaan.push(value);
+			prosedurPekerjaan = [...prosedurPekerjaan];
+		} else {
+			let index = prosedurPekerjaan.indexOf(value);
+			prosedurPekerjaan.splice(index, 1);
+			prosedurPekerjaan = [...prosedurPekerjaan];
+		}
+	};
+
 	const saveLocalStorage = () => {
 		localStorage.setItem('working-permit', JSON.stringify(data));
 	};
@@ -58,7 +70,7 @@
 	};
 
 	$: checkData = !Object.values(data).some((val) => val === '');
-	$: console.log(klasifikasi);
+	$: console.log(prosedurPekerjaan);
 
 	onMount(() => {
 		checkLocalStorage();
@@ -227,7 +239,7 @@
 										type="checkbox"
 										value={column}
 										id="flexCheckDefault"
-										name="prosedur_pekerjaan"
+										on:change={handleProsedur}
 									/>
 									<label class="form-check-label" for="flexCheckDefault"> {column} </label>
 								</div>
@@ -241,7 +253,7 @@
 										type="checkbox"
 										value={column}
 										id="flexCheckDefault"
-										name="prosedur_pekerjaan"
+										on:change={handleProsedur}
 									/>
 									<label class="form-check-label" for="flexCheckDefault"> {column} </label>
 								</div>
@@ -253,7 +265,7 @@
 							<label class="form-check-label" for="flexCheckDefault"> Lainnya </label>
 						</div>
 						<div class="col-lg">
-							<input class="form-control" type="text" />
+							<input class="form-control" type="text" name="prosedur_pekerjaan" />
 						</div>
 					</div>
 				</div>
@@ -340,10 +352,15 @@
 						</div>
 					</div>
 					<hr />
-					<a href="/input/jsa" class="btn btn-secondary rounded-0" class:disabled={!checkData} on:click={saveLocalStorage}
-						>Buat JSA</a
+					<a
+						href="/input/jsa"
+						class="btn btn-secondary rounded-0"
+						class:disabled={!checkData}
+						on:click={saveLocalStorage}>Buat JSA</a
 					>
-					<h6 class="text-center fst-italic text-danger mt-1 syarat" class:d-none={checkData}>Isi informasi pekerjaan terlebihdahulu</h6>
+					<h6 class="text-center fst-italic text-danger mt-1 syarat" class:d-none={checkData}>
+						Isi informasi pekerjaan terlebihdahulu
+					</h6>
 				</div>
 				<div class="d-flex justify-content-center mt-4">
 					<button class="btn btn-outline-secondary w-25" type="reset" on:click={deleteLocalStorage}
@@ -370,7 +387,7 @@
 	h6 {
 		font-weight: 700;
 	}
-	.syarat{
+	.syarat {
 		font-size: 12px;
 		font-weight: 400;
 	}
