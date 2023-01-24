@@ -67,10 +67,13 @@
 
 	const deleteLocalStorage = () => {
 		localStorage.removeItem('working-permit');
+		Object.keys(data).forEach((key) => {
+			data[key] = '';
+		});
 	};
 
 	$: checkData = !Object.values(data).some((val) => val === '');
-	$: console.log(prosedurPekerjaan);
+	$: console.log(data);
 
 	onMount(() => {
 		checkLocalStorage();
