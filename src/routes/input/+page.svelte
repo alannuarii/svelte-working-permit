@@ -20,9 +20,7 @@
 		detail_pekerjaan: '',
 		lokasi_pekerjaan: '',
 		pengawas_pekerjaan: '',
-		pengawas_k3: '',
-		tanggal_mulai: '',
-		tanggal_selesai: ''
+		pengawas_k3: ''
 	};
 	let hirarc = false;
 	let jsa = false;
@@ -59,11 +57,12 @@
 		localStorage.removeItem('working-permit');
 	};
 
+	$: checkData = !Object.values(data).some((val) => val === '');
+	$: console.log(klasifikasi);
+
 	onMount(() => {
 		checkLocalStorage();
 	});
-
-	$: console.log(klasifikasi);
 </script>
 
 <section class="container mt-3">
@@ -149,21 +148,11 @@
 					<div class="row mb-2">
 						<div class="col-lg-6">
 							<label for="exampleFormControlInput1" class="form-label">Tanggal Mulai</label>
-							<input
-								type="datetime-local"
-								class="form-control"
-								name="tanggal_mulai"
-								bind:value={data.tanggal_mulai}
-							/>
+							<input type="datetime-local" class="form-control" name="tanggal_mulai" />
 						</div>
 						<div class="col-lg-6">
 							<label for="exampleFormControlInput1" class="form-label">Tanggal Selesai</label>
-							<input
-								type="datetime-local"
-								class="form-control"
-								name="tanggal_selesai"
-								bind:value={data.tanggal_selesai}
-							/>
+							<input type="datetime-local" class="form-control" name="tanggal_selesai" />
 						</div>
 					</div>
 				</div>
@@ -351,9 +340,10 @@
 						</div>
 					</div>
 					<hr />
-					<a href="/input/jsa" class="btn btn-secondary rounded-0" on:click={saveLocalStorage}
+					<a href="/input/jsa" class="btn btn-secondary rounded-0" class:disabled={!checkData} on:click={saveLocalStorage}
 						>Buat JSA</a
 					>
+					<h6 class="text-center fst-italic text-danger mt-1 syarat" class:d-none={checkData}>Isi informasi pekerjaan terlebihdahulu</h6>
 				</div>
 				<div class="d-flex justify-content-center mt-4">
 					<button class="btn btn-outline-secondary w-25" type="reset" on:click={deleteLocalStorage}
@@ -379,5 +369,9 @@
 	}
 	h6 {
 		font-weight: 700;
+	}
+	.syarat{
+		font-size: 12px;
+		font-weight: 400;
 	}
 </style>
