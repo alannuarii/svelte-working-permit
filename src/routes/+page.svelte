@@ -22,6 +22,9 @@
 	];
 </script>
 
+<svelte:head>
+	<title>Working Permit</title>
+</svelte:head>
 <section class="container d-none d-lg-block">
 	<div class="row mb-2">
 		<div class="d-flex align-items-center">

@@ -3,6 +3,14 @@
 	export let tahap;
 	export let potensi;
 	export let pengendalian;
+
+	import { createEventDispatcher } from 'svelte';
+
+	const dispatch = createEventDispatcher();
+
+	const removeItem = () => {
+		dispatch('remove', index);
+	};
 </script>
 
 <div class="row mb-2">
@@ -10,16 +18,17 @@
 		<h6 class="text-center">{index}</h6>
 	</div>
 	<div class="col-lg-3">
-		<input type="text" class="form-control" bind:value={tahap} />
+		<input type="text" id="tahap" class="form-control" bind:value={tahap} on:change />
 	</div>
 	<div class="col-lg-3">
-		<input type="text" class="form-control" bind:value={potensi} />
+		<input type="text" id="potensi" class="form-control" bind:value={potensi} on:change />
 	</div>
 	<div class="col-lg-4">
-		<input type="text" class="form-control" bind:value={pengendalian} />
+		<input type="text" id="pengendalian" class="form-control" bind:value={pengendalian} on:change />
 	</div>
 	<div class="col-lg-1 text-center">
-		<div class="btn"><i class="bi-dash-circle-fill text-danger" /></div>
+		<!-- svelte-ignore a11y-click-events-have-key-events -->
+		<div class="btn" on:click={removeItem}><i class="bi-dash-circle-fill text-danger" /></div>
 	</div>
 </div>
 
@@ -42,5 +51,8 @@
 	}
 	i {
 		font-size: 20px;
+	}
+	.form-control {
+		border-radius: 0px;
 	}
 </style>
