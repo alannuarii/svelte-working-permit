@@ -1,7 +1,18 @@
 <script>
 	import PageTitle from '../../components/PageTitle.svelte';
 	import JSAItem from '../../components/JSAItem.svelte';
+	import { waktu } from '../../../lib/js/tanggal';
+	import { onMount } from 'svelte';
 
+	let data = {
+		idWP: 0,
+		tanggal_pengajuan: '',
+		nama_pekerjaan: '',
+		detail_pekerjaan: '',
+		lokasi_pekerjaan: '',
+		pengawas_pekerjaan: '',
+		pengawas_k3: ''
+	};
 	let items = [];
 	let tahap = [];
 	let potensi = [];
@@ -37,13 +48,84 @@
 		}
 	};
 
-	$: console.log(tahap);
-	$: console.log(potensi);
-	$: console.log(pengendalian);
+	const getData = () => {
+		const storedData = localStorage.getItem('working-permit');
+		data = JSON.parse(storedData);
+	};
+
+	onMount(() => {
+		getData();
+	});
+
+	$: console.log(typeof data.tanggal_pengajuan);
+	// $: console.log(potensi);
+	// $: console.log(pengendalian);
 </script>
 
 <section class="container mt-3">
 	<PageTitle title="buat jsa" />
+	<div class="card py-3 px-lg-5 px-4 rounded-0 shadow border-0 mb-3">
+		<div class="row mb-2">
+			<label for="inputEmail3" class="col-sm-3 col-form-label">Tanggal Pengajuan</label>
+			<div class="col-sm-9">
+				<input
+					type="text"
+					class="form-control"
+					id="inputEmail3"
+					value={waktu(data.tanggal_pengajuan)}
+					disabled
+				/>
+			</div>
+		</div>
+		<div class="row mb-2">
+			<label for="inputEmail3" class="col-sm-3 col-form-label">Nama Pekerjaan</label>
+			<div class="col-sm-9">
+				<input
+					type="text"
+					class="form-control"
+					id="inputEmail3"
+					value={data.nama_pekerjaan}
+					disabled
+				/>
+			</div>
+		</div>
+		<div class="row mb-2">
+			<label for="inputEmail3" class="col-sm-3 col-form-label">Lokasi Pekerjaan</label>
+			<div class="col-sm-9">
+				<input
+					type="text"
+					class="form-control"
+					id="inputEmail3"
+					value={data.lokasi_pekerjaan}
+					disabled
+				/>
+			</div>
+		</div>
+		<div class="row mb-2">
+			<label for="inputEmail3" class="col-sm-3 col-form-label">Pengawas Pekerjaan</label>
+			<div class="col-sm-9">
+				<input
+					type="text"
+					class="form-control"
+					id="inputEmail3"
+					value={data.pengawas_pekerjaan}
+					disabled
+				/>
+			</div>
+		</div>
+		<div class="row mb-2">
+			<label for="inputEmail3" class="col-sm-3 col-form-label">Pengawas K3</label>
+			<div class="col-sm-9">
+				<input
+					type="text"
+					class="form-control"
+					id="inputEmail3"
+					value={data.pengawas_k3}
+					disabled
+				/>
+			</div>
+		</div>
+	</div>
 	<div class="card py-3 px-lg-5 px-4 rounded-0 shadow border-0">
 		<div class="row text-center">
 			<div class="col-lg-1">
@@ -61,6 +143,7 @@
 		</div>
 		<hr />
 		<form method="POST">
+			<input type="hidden" name="wp_id" value={data.idWP} />
 			{#each items as item, index}
 				<JSAItem {item} index={index + 1} on:remove={handleRemove} on:change={handleInput} />
 			{/each}
@@ -87,5 +170,11 @@
 	}
 	button {
 		border-radius: 0;
+	}
+	label {
+		font-size: 15px;
+	}
+	.form-control {
+		border-radius: 0px;
 	}
 </style>

@@ -15,6 +15,7 @@
 	const column5 = ['Mekanik', 'Ketinggian', 'Kebisingan', 'Panas', 'Tekanan'];
 
 	let data = {
+		idWP: 0,
 		tanggal_pengajuan: '',
 		nama_pekerjaan: '',
 		detail_pekerjaan: '',
@@ -65,24 +66,37 @@
 		localStorage.setItem('working-permit', JSON.stringify(data));
 	};
 
-	const deleteLocalStorage = () => {
+	const deleteLocalStorage = (event) => {
 		localStorage.removeItem('working-permit');
-		Object.keys(data).forEach((key) => {
-			data[key] = '';
-		});
+		if (event.target.id === 'btn-reset') {
+			Object.keys(data).forEach((key) => {
+				data[key] = '';
+				data.idWP = 0;
+				randomEightDigit();
+			});
+		}
+	};
+
+	const randomEightDigit = () => {
+		const result = Math.floor(Math.random() * 90000000) + 10000000;
+		if (data.idWP === 0) {
+			data.idWP = result;
+		}
+		// data.idWP = result
 	};
 
 	$: checkData = !Object.values(data).some((val) => val === '');
-	$: console.log(data);
 
 	onMount(() => {
 		checkLocalStorage();
+		randomEightDigit();
 	});
 </script>
 
 <section class="container mt-3">
 	<PageTitle title="buat working permit" />
 	<form method="POST" enctype="multipart/form-data">
+		<input type="hidden" name="id_wp" bind:value={data.idWP} />
 		<div class="row">
 			<div class="col-lg-6 mb-3">
 				<div class="card py-3 px-lg-5 px-4 rounded-0 shadow border-0 mb-3">
@@ -133,6 +147,7 @@
 							class="form-control"
 							name="lokasi_pekerjaan"
 							bind:value={data.lokasi_pekerjaan}
+							required
 						/>
 					</div>
 					<div class="mb-2">
@@ -144,6 +159,7 @@
 							class="form-control"
 							name="pengawas_pekerjaan"
 							bind:value={data.pengawas_pekerjaan}
+							required
 						/>
 					</div>
 					<div class="mb-2">
@@ -153,8 +169,9 @@
 						<input
 							type="text"
 							class="form-control"
-							name="pangawas_k3"
+							name="pengawas_k3"
 							bind:value={data.pengawas_k3}
+							required
 						/>
 					</div>
 				</div>
@@ -268,9 +285,10 @@
 							<label class="form-check-label" for="flexCheckDefault"> Lainnya </label>
 						</div>
 						<div class="col-lg">
-							<input class="form-control" type="text" name="prosedur_pekerjaan" />
+							<input class="form-control" type="text" name="prosedur_lainnya" />
 						</div>
 					</div>
+					<input type="hidden" name="prosedur_pekerjaan" value={prosedurPekerjaan} />
 				</div>
 				<div class="card py-3 px-lg-5 px-4 rounded-0 shadow border-0">
 					<h6 class="text-primary-emphasis mb-3">E. Lampiran Izin Kerja</h6>
@@ -356,7 +374,7 @@
 					</div>
 					<hr />
 					<a
-						href="/input/jsa"
+						href="/input/{data.idWP}"
 						class="btn btn-secondary rounded-0"
 						class:disabled={!checkData}
 						on:click={saveLocalStorage}>Buat JSA</a
@@ -366,8 +384,11 @@
 					</h6>
 				</div>
 				<div class="d-flex justify-content-center mt-4">
-					<button class="btn btn-outline-secondary w-25" type="reset" on:click={deleteLocalStorage}
-						>Reset</button
+					<button
+						class="btn btn-outline-secondary w-25"
+						id="btn-reset"
+						type="reset"
+						on:click={deleteLocalStorage}>Reset</button
 					>
 					<button class="btn btn-primary w-25" type="submit" on:click={deleteLocalStorage}
 						>Kirim</button
