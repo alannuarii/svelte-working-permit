@@ -16,8 +16,6 @@ export const actions = {
 			formData.append('pengendalian_risiko', pengendalian)
 		}
 
-		// formData.append('potensi_risiko', data.getAll('potensi_risiko'));
-		// formData.append('pengendalian_risiko', data.getAll('pengendalian_risiko'));
 		formData.append('wp_id', data.get('wp_id'));
 
 		const res = await fetch('http://127.0.0.1:5000/jsa', {
