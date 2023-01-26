@@ -21,7 +21,7 @@
 		detail_pekerjaan: '',
 		lokasi_pekerjaan: '',
 		pengawas_pekerjaan: '',
-		pengawas_k3: ''
+		pengawas_k3: '',
 	};
 	let hirarc = false;
 	let jsa = false;

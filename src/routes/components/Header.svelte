@@ -15,6 +15,10 @@
 			<div class="px-3 py-2 bg-primary-subtle text-primary-emphasis d-flex align-items-center">
 				<i class="bi-person-circle me-2" />Alan Nuari
 			</div>
+		{:else if path.startsWith('/input/')}
+			<a class="navbar-brand flex-grow-1" href="/input">
+				<h5 class="text-primary-emphasis"><i class="bi-arrow-left me-2" />WORKING PERMIT</h5>
+			</a>
 		{:else}
 			<a class="navbar-brand flex-grow-1" href="/">
 				<h5 class="text-primary-emphasis"><i class="bi-arrow-left me-2" />WORKING PERMIT</h5>

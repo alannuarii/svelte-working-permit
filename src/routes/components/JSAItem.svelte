@@ -18,13 +18,25 @@
 		<h6 class="text-center">{index}</h6>
 	</div>
 	<div class="col-lg-3">
-		<input type="text" id="tahap" class="form-control" bind:value={tahap} on:change />
+		<input type="text" id="tahap" class="form-control" name="tahap_pekerjaan" bind:value={tahap} />
 	</div>
 	<div class="col-lg-3">
-		<input type="text" id="potensi" class="form-control" bind:value={potensi} on:change />
+		<input
+			type="text"
+			id="potensi"
+			class="form-control"
+			name="potensi_risiko"
+			bind:value={potensi}
+		/>
 	</div>
 	<div class="col-lg-4">
-		<input type="text" id="pengendalian" class="form-control" bind:value={pengendalian} on:change />
+		<input
+			type="text"
+			id="pengendalian"
+			class="form-control"
+			name="pengendalian_risiko"
+			bind:value={pengendalian}
+		/>
 	</div>
 	<div class="col-lg-1 text-center">
 		<!-- svelte-ignore a11y-click-events-have-key-events -->

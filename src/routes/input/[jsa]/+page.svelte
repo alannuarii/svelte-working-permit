@@ -14,9 +14,6 @@
 		pengawas_k3: ''
 	};
 	let items = [];
-	let tahap = [];
-	let potensi = [];
-	let pengendalian = [];
 	let newItem = {
 		langkah: '',
 		potensi: '',
@@ -35,19 +32,6 @@
 		items = [...items];
 	};
 
-	const handleInput = (event) => {
-		if (event.target.id === 'tahap') {
-			tahap.push(event.target.value);
-			tahap = [...tahap];
-		} else if (event.target.id === 'potensi') {
-			potensi.push(event.target.value);
-			potensi = [...potensi];
-		} else if (event.target.id === 'pengendalian') {
-			pengendalian.push(event.target.value);
-			pengendalian = [...pengendalian];
-		}
-	};
-
 	const getData = () => {
 		const storedData = localStorage.getItem('working-permit');
 		data = JSON.parse(storedData);
@@ -57,9 +41,7 @@
 		getData();
 	});
 
-	$: console.log(typeof data.tanggal_pengajuan);
-	// $: console.log(potensi);
-	// $: console.log(pengendalian);
+	$: itemsLength = items.length;
 </script>
 
 <section class="container mt-3">
@@ -145,12 +127,10 @@
 		<form method="POST">
 			<input type="hidden" name="wp_id" value={data.idWP} />
 			{#each items as item, index}
-				<JSAItem {item} index={index + 1} on:remove={handleRemove} on:change={handleInput} />
+				<JSAItem {item} index={index + 1} on:remove={handleRemove} />
 			{/each}
-			<input type="hidden" name="tahap_pekerjaan" value={tahap} />
-			<input type="hidden" name="potensi_risiko" value={potensi} />
-			<input type="hidden" name="pengendalian_risiko" value={pengendalian} />
-			<div class="d-flex justify-content-center mt-4">
+
+			<div class="d-flex justify-content-center mt-4" class:d-none={!itemsLength}>
 				<button class="btn btn-outline-secondary w-25" type="reset">Reset</button>
 				<button class="btn btn-primary w-25" type="submit">Kirim</button>
 			</div>
