@@ -1,6 +1,6 @@
 <script>
 	import InputButton from './components/InputButton.svelte';
-	import { waktu } from '../lib/js/tanggal';
+	import { waktu, konversiWaktu } from '../lib/js/tanggal';
 
 	export let data;
 
@@ -65,22 +65,30 @@
 	<div class="card py-3 px-4 rounded-0 shadow border-0">
 		<table class="table table-bordered">
 			<thead class="text-center">
-				<tr>
+				<tr class="bg-primary-subtle">
 					<th scope="col">No</th>
 					<th scope="col">Nama Pekerjaan</th>
 					<th scope="col">Tanggal</th>
 					<th scope="col">Pengawas Pekerjaan</th>
+					<th scope="col">Tipe</th>
 					<th scope="col">Detail</th>
+					<th scope="col">Action</th>
 				</tr>
 			</thead>
 			<tbody>
 				{#each permits as wp, i}
 					<tr>
-						<td class="text-center">{i+1}</td>
+						<td class="text-center">{i + 1}</td>
 						<td class="text-start">{wp.nama_pekerjaan}</td>
-						<td class="text-center">{wp.tanggal_pengajuan}</td>
+						<td class="text-center">{konversiWaktu(wp.tanggal_pengajuan)}</td>
 						<td class="text-center">{wp.pengawas_pekerjaan}</td>
-						<td class="text-center">Detail</td>
+						<td class="text-center"
+							><span class="badge text-bg-primary rounded-0">Internal</span></td
+						>
+						<td class="text-center"><a href="/{wp.id_wp}"><i class="bi-file-check text-primary" /></a></td>
+						<td class="text-center d-flex justify-content-evenly"
+							><i class="bi-pencil-square text-secondary" /><i class="bi-trash3 text-danger" /></td
+						>
 					</tr>
 				{/each}
 			</tbody>
@@ -94,5 +102,12 @@
 <style>
 	.card {
 		height: 530px;
+	}
+	th,
+	td {
+		font-size: 15px;
+	}
+	i{
+		cursor: pointer;
 	}
 </style>

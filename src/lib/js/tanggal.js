@@ -21,3 +21,10 @@ export function waktu(tanggal) {
 
 	return `${day}, ${date} ${month} ${year}`;
 }
+
+export function konversiWaktu(tanggal){
+	const date = new Date(tanggal)
+	const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+	const result = date.toLocaleDateString('id-ID', options)
+	return result
+}
