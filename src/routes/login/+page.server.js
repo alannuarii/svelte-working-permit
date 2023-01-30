@@ -22,6 +22,6 @@ export const actions = {
 
 		// console.log(!!result.access_token);
 
-		// return await res.json();
+		return result;
 	}
 };
