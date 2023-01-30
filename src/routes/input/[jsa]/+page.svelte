@@ -1,7 +1,7 @@
 <script>
 	import PageTitle from '../../components/PageTitle.svelte';
 	import JSAItem from '../../components/JSAItem.svelte';
-	import { waktu } from '../../../lib/js/tanggal';
+	import { date } from '../../../lib/js/datetime';
 	import { onMount } from 'svelte';
 
 	let data = {
@@ -54,7 +54,7 @@
 					type="text"
 					class="form-control"
 					id="inputEmail3"
-					value={waktu(data.tanggal_pengajuan)}
+					value={date(data.tanggal_pengajuan)}
 					disabled
 				/>
 			</div>
@@ -156,5 +156,7 @@
 	}
 	.form-control {
 		border-radius: 0px;
+		background-color: transparent;
+		border-color: #adb5bd;
 	}
 </style>

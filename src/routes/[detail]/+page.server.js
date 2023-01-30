@@ -1,9 +1,19 @@
 export const load = async (params) => {
-	const res = await fetch('http://127.0.0.1:5000/working-permit');
-	const data = res.json();
+	const id = params.params.detail;
+	const getWP = async () => {
+		const res = await fetch(`http://127.0.0.1:5000/working-permit/${id}`);
+		const data = res.json();
+		return data;
+	};
 
-	console.log(params.params.detail);
+	const getJSA = async () => {
+		const res = await fetch(`http://127.0.0.1:5000/jsa/${id}`);
+		const data = res.json();
+		return data;
+	};
+
 	return {
-		data: data
+		wp: getWP(),
+		jsa: getJSA()
 	};
 };

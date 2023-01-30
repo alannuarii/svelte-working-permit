@@ -1,6 +1,6 @@
 <script>
 	import InputButton from './components/InputButton.svelte';
-	import { waktu, konversiWaktu } from '../lib/js/tanggal';
+	import { date } from '../lib/js/datetime';
 
 	export let data;
 
@@ -25,11 +25,6 @@
 		'Desember'
 	];
 
-	// onMount(() => {
-	// 	console.log(data.wp);
-	// });
-
-	console.log(data.wp.data);
 </script>
 
 <svelte:head>
@@ -80,13 +75,13 @@
 					<tr>
 						<td class="text-center">{i + 1}</td>
 						<td class="text-start">{wp.nama_pekerjaan}</td>
-						<td class="text-center">{konversiWaktu(wp.tanggal_pengajuan)}</td>
+						<td class="text-center">{date(wp.tanggal_pengajuan)}</td>
 						<td class="text-center">{wp.pengawas_pekerjaan}</td>
 						<td class="text-center"
 							><span class="badge text-bg-primary rounded-0">Internal</span></td
 						>
 						<td class="text-center"><a href="/{wp.id_wp}"><i class="bi-file-check text-primary" /></a></td>
-						<td class="text-center d-flex justify-content-evenly"
+						<td class="text-center d-flex justify-content-evenly align-items-center"
 							><i class="bi-pencil-square text-secondary" /><i class="bi-trash3 text-danger" /></td
 						>
 					</tr>
@@ -110,4 +105,7 @@
 	i{
 		cursor: pointer;
 	}
+	table{
+        border-color: #adb5bd;;
+    }
 </style>
